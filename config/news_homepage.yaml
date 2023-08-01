@@ -1,8 +1,18 @@
-chosun: https://www.chosun.com/
-joongang: https://www.joongang.co.kr/
-donga: https://www.donga.com/news/
-seoul: https://www.seoul.co.kr/news/newsList.php?section=politics
-khan: https://www.khan.co.kr/
-maeil: https://news.imaeil.com/
-hani: https://www.hani.co.kr/arti/
-hankook: https://hankookilbo.com/News
+main_category:
+  - politics
+  - economy
+  - international
+  - society
+  - culture
+  - entertainment
+  - sports
+
+news_url:
+  chosun: https://www.chosun.com
+  joongang: https://www.joongang.co.kr
+  donga: https://www.donga.com/news
+  seoul: https://www.seoul.co.kr/news/newsList.php?section=
+  khan: https://www.khan.co.kr
+  maeil: https://news.imaeil.com
+  hani: https://www.hani.co.kr/arti
+  hankook: https://hankookilbo.com/News
