@@ -14,6 +14,7 @@
 - donga(동아일보): https://www.donga.com/news/
     <!-- - 세부카테고리 뉴스리스트: https://www.donga.com/news/<category1>/<category2>/ -->
     - 세부 url: https://www.donga.com/news/<category1>/article/all/yyyymmdd/<news_id>/[1|2] ex. 20230727/120437634/1
+    - news_id: [0-9]{9}
 
 - seoul(서울신문): https://www.seoul.co.kr/news/newsList.php?section=
     - 세부 url: https://www.seoul.co.kr/news/newsView.php?id=<news_id>
@@ -32,8 +33,8 @@
     - news_id: [0-9]{7}
 
 - hankook(한국일보): https://www.hankookilbo.com/
-    - 세부 url: https://www.hankookilbo.com/News/Read/A2023072715420004839
-    - news_id: [0-9A-Z]{20}
+    - 세부 url: https://www.hankookilbo.com/News/Read/\<news_id>
+    - news_id: [0-9A-Z]{20} ex. A2023072715420004839
 
 ### 2. 뉴스 주요 7대 카테고리
 - 정치, 경제, 국제, 사회, 문화, 연예, 스포츠
