@@ -1,0 +1,25 @@
+donga:
+  list:
+    tag: div
+    class: articleList article_list
+  list_title:
+    tag: span
+    class: tit
+  detail_url:
+    tag: a
+    attrs: href
+  title:
+    tag: h1 
+    class: title
+  contents:
+    tag: div
+    class: article_txt
+  author:
+    tag: span
+    class: name
+  date:
+    tag: span
+    class: date01
+  image:
+    tag: div
+    class: articlePhotoC
