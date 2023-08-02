@@ -7,12 +7,28 @@ main_category:
   - entertainment
   - sports
 
-news_url:
-  chosun: https://www.chosun.com
-  joongang: https://www.joongang.co.kr
-  donga: https://www.donga.com/news
-  seoul: https://www.seoul.co.kr/news/newsList.php?section=
-  khan: https://www.khan.co.kr
-  maeil: https://news.imaeil.com
-  hani: https://www.hani.co.kr/arti
-  hankook: https://hankookilbo.com/News
+url:
+  chosun: 
+    main: https://www.chosun.com
+    list_endpoint: 
+  joongang: 
+    main: https://www.joongang.co.kr
+    list_endpoint:
+  donga: 
+    main: https://www.donga.com
+    list_endpoint: /news
+  seoul: 
+    main: https://www.seoul.co.kr
+    list_endpoint: /news/newsList.php?section=
+  khan: 
+    main: https://www.khan.co.kr
+    list_endpoint: 
+  maeil: 
+    main: https://news.imaeil.com
+    list_endpoint: 
+  hani: 
+    main: https://www.hani.co.kr
+    list_endpoint: /arti
+  hankook:
+    main: https://hankookilbo.com
+    list_endpoint: /News
