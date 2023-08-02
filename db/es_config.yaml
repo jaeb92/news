@@ -1,0 +1,5 @@
+host: localhost
+port: 9200
+username: elastic
+password: _98dKU-=2J_pkreMXew6
+verify_certs: False
