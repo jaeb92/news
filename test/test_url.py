@@ -1,10 +1,16 @@
+import os
+import sys
+
+import sys
+sys.path.append('/Users/jaeb/news/utils')
+print(sys.path)
 import yaml
 import requests
 import argparse
 import pandas as pd
 
+from utils.imgs import save_img
 from bs4 import BeautifulSoup
-
 with open('config/tag.yaml', 'r') as f:
     tag_config = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -14,7 +20,7 @@ with open('config/news_homepage.yaml', 'r') as f:
 news_category = pd.read_excel('data/news_category_eng.xlsx', sheet_name=None, index_col=0)
 
 
-def get_html(url):
+def test_get_html(url):
     res = requests.get(url)
     return BeautifulSoup(res.text, 'html.parser')
 
@@ -54,7 +60,8 @@ def get_news_detail(detail_urls):
         print("author:", author)
         print('date:', date)
         print(images)
-
+        save_img(images, site, news_id)
+        
 
 def get_news_detail_url(url):
     html = get_html(url)
@@ -66,7 +73,6 @@ def get_news_detail_url(url):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--site', dest='site', help='ex. chosun, joonang, donga, seoul, khan, maeil, hani, hankook')
     args = parser.parse_args()
