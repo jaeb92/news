@@ -58,18 +58,17 @@
 >>4. 상세페이지 url
 >>- 태그명: a
 >>- 속성: href, ex. /\<category1>/\<category2>/\<yyyy>/\<mm>/\<dd>/\<news_id>
-
 > ##### - 뉴스 상세페이지
 >- url: https://www.chosun.com/\<category1>/\<category2>/\<yyyy>/\<mm>/\<dd>/\<news_id>
 >>1. 뉴스제목
 >>- 태그명: h1
->>- 클래스: article-header__headline | font--secondary text--black
+>>- 클래스: article-header__headline
 >>2. 뉴스본문
->>- 태그명: p
->>- 클래스: article-body__content article-body__content-text | text--black text font--size-sm-18 font--size-md-18 font--primary
+>>- 태그명: section
+>>- 클래스: article-body
 >>3. 기자
->>- 태그명: a
->>- 클래스: article-byline__author | text--wrap-pre text--black text__link--underline
+>>- 태그명: span
+>>- 클래스: article-byline__author
 >>4. 입력시간
 >>- 태그명: span
 >>- 클래스: inputDate
@@ -77,7 +76,7 @@
 >>- 태그명: span
 >>- 클래스: upDate
 >>6. 본문 내 이미지
->>- 태그명: a
+>>- 태그명: img
 >>- 클래스: box--display-block cover
 
 #### 3-2. 중앙일보
@@ -118,7 +117,7 @@
 >- url: https://www.donga.com/news/\<category1>/\<category2>
 >>1. 뉴스리스트 테이블
 >>- 태그명: div
->>- 클래스: articleList article_list
+>>- 클래스: etcCon etcPage
 >>2. 뉴스리스트 제목
 >>- 태그명: span
 >>- 클래스: tit
@@ -176,8 +175,8 @@
 >##### - 뉴스 리스트페이지
 >- url: https://www.khan.co.kr/\<category1>/\<category2>/articles
 >>1. 뉴스리스트 테이블
->>- 태그명: ul
->>- 클래스: df-list
+>>- 태그명: div
+>>- 클래스: cont-main
 >>2. 뉴스리스트 제목
 >>- 태그명: h2
 >>- 클래스: tit
@@ -221,7 +220,7 @@
 >>- 클래스: title
 >>2. 뉴스본문
 >>- 태그명: div
->>- 클래스: articlebody
+>>- 클래스: article_content
 >>3. 기자
 >>- 태그명: span
 >>- 클래스: name
@@ -269,9 +268,8 @@
 >>- 태그명: ul
 >>- 클래스: board-list column-3
 >>2. 뉴스리스트 제목
->>- 태그명: 
+>>- 태그명: h3
 >>- 클래스:
-
 >##### - 뉴스 상세페이지
 >- url: https://www.hankookilbo.com/News/Read/\<news_id>
 >>1. 뉴스 제목
@@ -279,7 +277,7 @@
 >>- 클래스: title
 >>2. 뉴스 본문
 >>- 태그명: p
->>- 클래스: editor-p read
+>>- 클래스: editor-p
 >>3. 기자
 >>- 태그명: span
 >>- 클래스: nm
