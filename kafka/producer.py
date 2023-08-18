@@ -6,14 +6,14 @@ from kafka.errors import KafkaError
 
 with open('kafka/config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)            
-print(config)
-exit()
 producer = KafkaProducer(
-            # bootstrap_servers=['kafka-1:9092', 'kafka-2:9092', 'kafka-3:9092'],
-            bootstrap_servers=config['brokers']
-            )      
+        # bootstrap_servers=['kafka-1:9092', 'kafka-2:9092', 'kafka-3:9092'],
+        bootstrap_servers=config['brokers'],
+        value_serializer=lambda x: json.dumps(x).encode('utf-8')
+        )      
 # Asynchronous by default
-future = producer.send('my-topic', b'raw_bytes')
+# future = producer.send('test333', {'sample': {}})
+future = producer.send('test333', 'akljflawk')
 
 # Block for 'synchronous' sends
 try:
