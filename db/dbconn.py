@@ -1,6 +1,8 @@
 import yaml
 import sys
 import psycopg2
+import psycopg2.extras
+
 from datetime import datetime
 
 with open('db/config.yaml', 'r') as f:
@@ -92,12 +94,18 @@ class Database(metaclass=Singleton):
     def insert(self, q: str, v: tuple):
         self.execute(query=q, vars=v)
         self.commit()
+    
+    def insert_bulk(self, q: str, arg: list):
+        psycopg2.extras.execute_values(cur=self.cursor, sql=q, argslist=arg)
+        self.commit()
+        
         
 if __name__ == '__main__':
     db = Database()
-    cols = db.table_schema('news')
-    col = ','.join(col[0] for col in cols)
-    params = ','.join('%s' for i in range(len(cols)))
-    query = f"insert into news ({col}) values ({params})"
-    values = ('sample news2', '1aweoifjawe', 'oiwajef', 'awioefjawe', datetime.now(), 'test')
+    db.insert_bulk()
+    # cols = db.table_schema('news')
+    # col = ','.join(col[0] for col in cols)
+    # templates = ','.join('%s' for i in range(len(cols)))
+    # query = f"insert into news ({col}) values ({templates})"
+    # values = ('sample news2', '1aweoifjawe', 'oiwajef', 'awioefjawe', datetime.now(), 'test')
 
