@@ -1,5 +1,5 @@
 host: postgres
 port: 5432
-user: postgres
+user: jaeb
 password: postgres
-database: postgres
+database: news

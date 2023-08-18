@@ -3,6 +3,6 @@ create table news (
     title varchar not null,
     content text not null,
     author varchar,
-    date timestamp,
+    date varchar,
     source varchar
 )

@@ -34,6 +34,9 @@ class Database(metaclass=Singleton):
 
         self.cursor = self.db.cursor()
     
+    def get_conn(self):
+        return self.db
+    
     def close(self):
         self.cursor.close()
         self.db.close()
@@ -59,8 +62,10 @@ class Database(metaclass=Singleton):
             select column_name, data_type, character_maximum_length \
             from information_schema.columns \
             where table_catalog = \'{config['database']}\' and table_name = \'{table}\' order by ordinal_position")
-        print(res)
         return res
+
+    def get_table_column_name(self, table):
+        return [info[0] for info in self.table_schema(table)]
         
     def execute(self, query: str, vars=None):
         self.cursor.execute(query=query, vars=vars)

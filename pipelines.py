@@ -2,6 +2,9 @@ import json
 import argparse
 import traceback
 
+# db module
+from db.dbconn import Database
+
 # get raw contents from news homepage
 from crawling.crawling import NewsCrawler
 
@@ -9,20 +12,21 @@ from crawling.crawling import NewsCrawler
 from preprocess import *
 
 # save to elasticsearch index
-from elastic.es import ElasticSearch
+# from elastic.es import ElasticSearch
 
-# python kafka client
-from kafka import KafkaProducer
+def save(docs: list):
+    table = 'news'
+    columns = db.get_table_column_name(table=table)
+    columns = ','.join(columns)
+    sql = f"insert into {table} ({columns}) values %s"
+    values = [tuple(doc.values()) for doc in news_docs]
 
-producer = KafkaProducer(
-    bootstrap_servers=['kafka-1:9092', 'kafka-2:9092', 'kafka-3:9092'],
-    client_id='news_raw_producer',
-    key_serializer=None,
-    value_serializer=lambda x: json.dumps(x).encode("utf-8")
-)
+    # print(values)
+    db.insert_bulk(q=sql, arg=values)
+
+
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--site', dest='site', help='ex. chosun, joonang, donga, seoul, khan, maeil, hani, hankook')
     args = parser.parse_args()
@@ -34,10 +38,5 @@ if __name__ == '__main__':
     news_detail_urls = newsCrawler.get_news_detail_url(news_list_url=news_list_url)
     news_docs = newsCrawler.get_news_detail(news_detail_urls)
     
-    es = ElasticSearch()
-    try:
-        for doc in news_docs:
-            res = es.insert(index='news', document=doc)
-            print("res:", res)
-    except:
-        traceback.print_exc()   
+    db = Database()
+    save(news_docs)
