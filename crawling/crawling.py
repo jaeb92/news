@@ -116,7 +116,7 @@ class NewsCrawler:
                 print(e)
 
             try:
-                title = line_to_space(html.find(self.title_tag, self.title_class).text.strip())
+                title = line_to_space(html.find(self.title_tag, self.title_class).text)
             except Exception as e:
                 print(e)
 
@@ -124,32 +124,32 @@ class NewsCrawler:
                 if self.site == 'hankook':
                     contents = ' '.join([tag.text for tag in html.find_all('p', 'editor-p')])
                 else:
-                    contents = line_to_space(html.find(self.contents_tag, self.contents_class).text.strip())
+                    contents = line_to_space(html.find(self.contents_tag, self.contents_class).text)
             except Exception as e:
                 print(e)
 
             try:
                 if self.site == 'seoul':
                     author = contents.split()[0]
-                author = line_to_space(html.find(self.author_tag, self.author_class).text.strip())
+                author = line_to_space(html.find(self.author_tag, self.author_class).text)
                 
             except Exception as e:
                 pass
             
             try:
-                date = line_to_space(html.find(self.date_tag, self.date_class).text.strip())
+                date = line_to_space(html.find(self.date_tag, self.date_class).text)
             except Exception as e:
                 print(e)
 
             # images = html.find_all(image_tag, image_class)
             # images = [tag.find('img').attrs['src'] for tag in images]
             docs.append({
-                'news_id': news_id,
-                'title': title,
-                'contents': contents,
-                'author': author,
-                'date': date,
-                'source': source
+                'news_id': news_id.strip(),
+                'title': title.strip(),
+                'contents': contents.strip(),
+                'author': author.strip(),
+                'date': date.strip(),
+                'source': source.strip()
             })
     
         return docs
