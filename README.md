@@ -12,11 +12,12 @@
     - news_id: [0-9]{8} ex. 25180554
 
 - donga(동아일보): https://www.donga.com/news/
-    <!-- - 세부카테고리 뉴스리스트: https://www.donga.com/news/<category1>/<category2>/ -->
+    - 날짜: ymd=20230801
     - 세부 url: https://www.donga.com/news/<category1>/article/all/yyyymmdd/<news_id>/[1|2] ex. 20230727/120437634/1
     - news_id: [0-9]{9}
 
 - seoul(서울신문): https://www.seoul.co.kr/news/newsList.php?section=
+    - 날짜: date=2023-08-01
     - 세부 url: https://www.seoul.co.kr/news/newsView.php?id=<news_id>
     - news_id: yyyymmdd[0-9]{6} ex. 20230727500072
 
