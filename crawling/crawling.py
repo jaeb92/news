@@ -16,7 +16,7 @@ with open('config/tag.yaml', 'r') as f:
 with open('config/news_info.yaml', 'r') as f:
     site_config = yaml.load(f, Loader=yaml.FullLoader)
 
-news_category = pd.read_excel('data/news_category_eng.xlsx', sheet_name=None, index_col=0)
+news_category = pd.read_excel('data/news_category.xlsx', sheet_name=None, index_col=0)
 
 
 class NewsCrawler:
@@ -185,29 +185,45 @@ class NewsCrawler:
         Returns:
             str: news list page url 
         """
-        news_list_url = self.news_main_url + self.endpoint if self.endpoint else self.news_main_url
-        # print('news_list_url:', news_list_url)
         
         main_category = site_config['main_category'][0]
-        category1 = news_category[main_category][self.site][0]
-        category2 = news_category[main_category][self.site][1]
-        print('category1:', category1, ' category2:', category2)
+        main_categories = site_config['main_category']
 
-        if self.site == 'seoul':
-            news_list_url = news_list_url + category2
-        elif self.site == 'khan':
-            news_list_url = news_list_url + '/' + category1 + '/' + category2 + '/articles'
-        elif self.site == 'maeil':
-            news_list_url = news_list_url + '/' + category2
-        else:
-            news_list_url = news_list_url + '/' + category1 + '/' + category2
-    
+        # main category have 7 categories (politics, economy, international, society, culture, entertainment, sports)
+        for main_category in main_categories: 
+            
+            # fill '' for nan value
+            news_category[main_category].fillna('', inplace=True) 
+            category_list = news_category[main_category][self.site]
+            category1 = category_list[0]
+            
+            if category1 == '':
+                continue
+            
+            for i in range(1, len(category_list)):
+                news_list_url = self.news_main_url + self.endpoint if self.endpoint else self.news_main_url
+                category2 = news_category[main_category][self.site][i]
+                
+                if category2 == '':
+                    continue
+
+                if self.site == 'seoul':
+                    news_list_url = news_list_url + category2
+                elif self.site == 'khan':
+                    news_list_url = news_list_url + '/' + category1 + '/' + category2 + '/articles'
+                elif self.site == 'maeil':
+                    news_list_url = news_list_url + '/' + category2
+                else:
+                    news_list_url = news_list_url + '/' + category1 + '/' + category2
+                print(news_list_url)
+                
+        exit()
         return news_list_url
     
 
 if __name__ == '__main__':
 
-    newsCrawler = NewsCrawler('joongang')
+    newsCrawler = NewsCrawler('hankook')
     news_list_url = newsCrawler.get_news_list_url()
     news_detail_urls = newsCrawler.get_news_detail_url(news_list_url)
     news_details = newsCrawler.get_news_detail(news_detail_urls)
