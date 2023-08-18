@@ -1,0 +1,14 @@
+brokers:
+  - kafka-1:9092
+  - kafka-2:9092
+  - kafka-3:9092
+
+topics:
+  - news:
+      partitions: 3
+
+  - preprocess:
+      partitions: 3
+    
+  - db:
+      partitions: 3
