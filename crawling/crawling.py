@@ -188,7 +188,7 @@ class NewsCrawler:
         
         main_category = site_config['main_category'][0]
         main_categories = site_config['main_category']
-
+        news_urls = []
         # main category have 7 categories (politics, economy, international, society, culture, entertainment, sports)
         for main_category in main_categories: 
             
@@ -215,17 +215,19 @@ class NewsCrawler:
                     news_list_url = news_list_url + '/' + category2
                 else:
                     news_list_url = news_list_url + '/' + category1 + '/' + category2
-                print(news_list_url)
-                
-        exit()
-        return news_list_url
+                    
+                news_urls.append(news_list_url)
+                # print(news_list_url)
+        
+        return news_urls
     
 
 if __name__ == '__main__':
 
     newsCrawler = NewsCrawler('hankook')
     news_list_url = newsCrawler.get_news_list_url()
-    news_detail_urls = newsCrawler.get_news_detail_url(news_list_url)
-    news_details = newsCrawler.get_news_detail(news_detail_urls)
-
-    print(len(news_details))
+    # print(news_list_url)
+    for url in news_list_url:
+        news_detail_urls = newsCrawler.get_news_detail_url(url)
+        # print(url, news_detail_urls)
+        news_details = newsCrawler.get_news_detail(news_detail_urls)

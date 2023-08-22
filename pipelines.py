@@ -11,6 +11,8 @@ from crawling.crawling import NewsCrawler
 # preprocess for contents
 from preprocess import *
 
+from config.configuration import Config
+
 # save to elasticsearch index
 # from elastic.es import ElasticSearch
 
@@ -31,8 +33,12 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--site', dest='site', help='ex. chosun, joonang, donga, seoul, khan, maeil, hani, hankook')
     args = parser.parse_args()
     site = args.site
+    
+    config = Config(site)
+    news_info, tag = config.get_config()
     print(f"Start python kafka stream pipeline for \'{site}\'")
 
+    
     newsCrawler = NewsCrawler(site)
     news_list_url = newsCrawler.get_news_list_url()
     news_detail_urls = newsCrawler.get_news_detail_url(news_list_url=news_list_url)
