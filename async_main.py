@@ -3,25 +3,25 @@ import yaml
 import aiohttp
 import aiofiles
 import asyncio
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from db.dbconn import Database
+
+today = datetime.today()
+today = datetime.strftime(today, '%Y%m%d')
 
 main_url = 'https://hankookilbo.com'
 main_category = "Politics"
 subcategories = ["HA01","HA02","HA03","HA04","HA99"]
 db_columns = ['title', 'contents', 'author', 'date', 'source']
-baseurl = main_url + '/News/{category}/{subcategory}'
+columns = ','.join(db_columns)
+table = 'news'
+baseurl = main_url + '/News/{category}/{subcategory}?SortType=&SearchDate={today}'
 
 db = Database()
-
 async def save(news):
-    table = 'news'
-    columns = ','.join(db_columns)
     sql = f"insert into {table} ({columns}) values %s"
     values = [tuple(n.values()) for n in news]
-
-
-    # print(values)
     db.insert_bulk(q=sql, arg=values)
     
     
@@ -79,23 +79,22 @@ async def get_news(url: str):
             'site': source
         })
         
-    await save(news) 
-
-        # print(i, title.strip(), author.strip(), date.strip(), contents.strip()[:10])
-
-    # return news
+    await save(news)
     
     
-async def main():
-    futures = [asyncio.ensure_future(get_news(baseurl.format(category=main_category, subcategory=subcategory))) for subcategory in subcategories]
+async def run():
+    futures = [asyncio.ensure_future(get_news(baseurl.format(category=main_category, subcategory=subcategory, today=today))) for subcategory in subcategories]
     await asyncio.gather(*futures)
 
-    # print(len(news))
     
 if __name__ == '__main__':
+    # start time
     start = time.time()
+    
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+    loop.run_until_complete(run())
     loop.close()
+    
+    # end time
     end = time.time()
     print(f"running time: {end - start:.4f}s")
