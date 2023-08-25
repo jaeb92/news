@@ -117,7 +117,7 @@ def get_news_detail_url(url: str) -> list:
     news_detail_urls = [tag.attrs[detail_attrs] for tag in news_detail_url_tag if tag]
 
     if site == 'seoul' or site == 'hani' or site == 'maeil' or site == 'hankook':
-        news_detail_urls = [news_main_url + detail_url for detail_url in news_detail_urls]
+        news_detail_urls = [news_base_url + detail_url for detail_url in news_detail_urls]
 
     return news_detail_urls
 
@@ -154,10 +154,10 @@ if __name__ == "__main__":
     image_tag = tag_config[site]['image']['tag']
     image_class = tag_config[site]['image']['class']
     
-    news_main_url = site_config['url'][site]['main']
+    news_base_url = site_config['url'][site]['base']
     endpoint = site_config['url'][site]['list_endpoint']
     
-    news_list_url = news_main_url + endpoint if endpoint else news_main_url
+    news_list_url = news_base_url + endpoint if endpoint else news_base_url
     # print('news_list_url:', news_list_url)
     
     main_category = site_config['main_category'][0]

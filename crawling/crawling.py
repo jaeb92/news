@@ -48,7 +48,7 @@ class NewsCrawler:
         self.image_tag = tag_config[site]['image']['tag']
         self.image_class = tag_config[site]['image']['class']
         
-        self.news_main_url = site_config['url'][self.site]['main']
+        self.news_base_url = site_config['url'][self.site]['base']
         self.endpoint = site_config['url'][self.site]['list_endpoint']
         
 
@@ -173,7 +173,7 @@ class NewsCrawler:
         news_detail_urls = [tag.attrs[self.detail_attrs] for tag in news_detail_url_tag if tag]
 
         if self.site == 'seoul' or self.site == 'hani' or self.site == 'maeil' or self.site == 'hankook':
-            news_detail_urls = [self.news_main_url + detail_url for detail_url in news_detail_urls]
+            news_detail_urls = [self.news_base_url + detail_url for detail_url in news_detail_urls]
 
         return news_detail_urls
 
@@ -201,7 +201,7 @@ class NewsCrawler:
                 continue
             
             for i in range(1, len(category_list)):
-                news_list_url = self.news_main_url + self.endpoint if self.endpoint else self.news_main_url
+                news_list_url = self.news_base_url + self.endpoint if self.endpoint else self.news_base_url
                 category2 = news_category[main_category][self.site][i]
                 
                 if category2 == '':

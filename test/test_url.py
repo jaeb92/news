@@ -104,10 +104,10 @@ if __name__ == "__main__":
     image_tag = tag_config[site]['image']['tag']
     image_class = tag_config[site]['image']['class']
     
-    news_main_url = site_config['news_url'][site]
+    news_base_url = site_config['news_url'][site]
     main_category = site_config['main_category'][0]
     category1 = news_category[main_category][site][0]
     category2 = news_category[main_category][site][2]
-    url = news_main_url + '/' + category1 + '/' + category2
+    url = news_base_url + '/' + category1 + '/' + category2
     detail_urls = get_news_detail_url(url)
     get_news_detail(detail_urls=detail_urls)

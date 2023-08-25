@@ -25,7 +25,7 @@ joongang:
     society: [general, accident, lawa, education, welfare, helathcare, environment, traffic, national]
   culture:
     culture: [general, book, exhibition, performance, song, movie, broadcast]
-  # entertainment:
+  entertainment:
   sports:
     sports: [general, baseball, soccer, golf, basketvolley]
 
